@@ -1,0 +1,32 @@
+# --- 文档类（不推送至仓库）---
+*.docx
+*.doc
+*.pdf
+*.pptx
+*.ppt
+*.xls
+*.xlsx
+*.pom.wpsonline
+
+# --- Markdown 文档（README 除外）---
+*.md
+!README.md
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+
+# --- IDE / OS ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+~$*
+
+# --- 临时调试 ---
+_dump*.txt
+_dump*.py
