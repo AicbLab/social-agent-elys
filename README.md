@@ -1,6 +1,8 @@
 # AI Social Agent: Public Opinion Mining and Adoption Intention Study
 
 > Multi-platform opinion mining × PLS-SEM structural equation modeling — a complete pipeline from "what users say" to "why users adopt."
+>
+> **Status**: Under revision (R1) for *Information Technology & People* (Emerald)
 
 [![GitHub](https://img.shields.io/badge/GitHub-AicbLab%2Fsocial--agent--elys-181717?logo=github)](https://github.com/AicbLab/social-agent-elys)
 ![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)
@@ -10,17 +12,18 @@
 
 ## Overview
 
-This project investigates public perception and adoption intention of **AI Social Agents (digital avatars / social proxies)** through a two-stage empirical study:
+This project investigates public perception and anticipated adoption of **AI Social Agents (digital avatars / social proxies)** through a two-stage empirical study:
 
-1. **Qualitative + Text Mining Stage**: Collected **26,658 comments** from five Chinese social media platforms (Bilibili, Weibo, Zhihu, Xiaohongshu, Douban). Applied keyword filtering, word-frequency analysis, and LDA topic modeling to extract **antecedent variables and thematic structures** of user concerns.
-2. **Quantitative Modeling Stage**: Designed 5-point Likert scales based on identified antecedents, conducted focus group interviews and survey research, obtaining a final sample of **n = 797**. Used **PLS-SEM** to test the full path: Push → Enabler → Value → Concern → Adoption → Behavioral Intention.
+1. **Qualitative + Text Mining Stage**: Collected **94,493 raw comments** from five Chinese social media platforms (Bilibili, Weibo, Zhihu, Xiaohongshu, Douban). After deduplication and relevance screening, 22,204 comments were preserved. Applied LDA topic modeling (k = 10, C_v = 0.5478) to extract **antecedent constructs and thematic structures** of user concerns.
+2. **Quantitative Modeling Stage**: Designed 5-point Likert scales based on identified antecedents, conducted focus group interviews (4 groups, 29 participants) and survey research, obtaining a final sample of **n = 720**. Used **PLS-SEM** (SmartPLS 3) to test the full path: Push → Enabler → Value → Concern → Anticipated Adoption Intensity.
 
 ### Key Results at a Glance
 
-- **14 latent constructs all passed reliability and validity checks** (Cronbach's α 0.80–0.94, CR 0.86–0.95)
+- **12 constructs passed reliability and validity checks** (Cronbach's α 0.828–0.944, CR 0.881–0.949)
 - **HTMT discriminant validity confirmed** (all theoretically independent construct pairs < 0.85)
-- **Adoption Intensity R² = 0.547**; Willingness to Pay / Usage Intention / Delegation Extent R² > 0.73
-- Key paths: `Self-Extension Trust (β = 0.429)` + `Cognitive Offloading (β = 0.415)` → **Adoption Intensity** → three behavioral intentions (β > 0.85)
+- **Anticipated Adoption Intensity R² = 0.513** (model explains ~51% of variance)
+- Key paths: `Digital Self-Extension Credibility (β = 0.603)` + `Perceived Cognitive Benefit (β = 0.168)` → **Anticipated Adoption Intensity**
+- AAI modeled as **formative construct** via PCA single-indicator method (usage intention, delegation extent, willingness to pay)
 
 ---
 
@@ -34,26 +37,14 @@ social-agent-elys/
 │   ├── Zhihu.csv
 │   ├── Xiaohongshu.csv
 │   ├── Douban.csv
-│   ├── all_comments.txt                        # Merged across platforms (26,658 entries)
-│   ├── related_comments.txt                    # Initial keyword-filtered subset
-│   ├── strictly_filtered_comments.txt          # Strictly filtered subset
-│   ├── final_filtered_comments.txt             # Final filtered subset
-│   ├── antecedent_analysis_results.csv         # Antecedent variable identification
-│   ├── antecedent_analysis_chart.png           # Antecedent visualization
-│   ├── typical_comments_after_filter.csv       # Representative comment samples
-│   ├── LDA_topic_distribution.csv              # LDA topic distribution
-│   ├── LDA_topic_analysis_results.csv          # LDA analysis output
-│   ├── LDA_topic_parsing_results.csv           # Parsed topic labels
-│   ├── LDA_loose_topic_distribution.csv        # Loose-filter topic distribution
-│   ├── LDA_loose_pending_topics.csv            # Loose-filter candidate topics
+│   ├── LDA_*.csv                               # LDA model outputs and topic distributions
 │   ├── LDA_NPMI_results.csv                    # NPMI coherence scores
-│   ├── AI_agent_LDA_*.csv                      # Multiple LDA model outputs (7 variants)
-│   └── AI_agent_*_comments.txt                 # Filtered comment subsets (3 variants)
+│   └── *.txt / *.csv                           # Filtered comments and analysis results
 │
-├── survey_797.csv                              # Final survey dataset (n = 797)
-├── fig 1.png                                   # PLS-SEM path diagram (conceptual model)
-├── fig 2.png                                   # PLS-SEM path diagram (estimated results)
-├── SmartPLS screenshot(but partially in Chinese).png  # SmartPLS output screenshot
+├── survey_720.csv                              # Final survey dataset (n = 720)
+├── survey_720_pca.txt                          # PCA scores for formative construct indicators
+├── clean_sim_pcb.py                            # Data cleaning script for PCB construct
+├── pca_scores.py                               # PCA single-indicator computation script
 ├── README.md
 └── .gitignore
 ```
@@ -76,7 +67,7 @@ graph TB
     E --> G[Scale Item Design]
     F --> G
     G --> H[Focus Group Interviews]
-    H --> I[Survey Research n=797]
+    H --> I[Survey Research n=720]
     I --> J[PLS-SEM Model Testing]
     J --> K[Research Conclusions]
 ```
@@ -85,71 +76,73 @@ graph TB
 
 | Step | Output |
 |---|---|
-| 1. Multi-platform crawling (Bilibili / Weibo / Zhihu / Xiaohongshu / Douban) | `text-mining-data/*.csv` |
-| 2. Keyword + semantic filtering | `related_comments.txt` (22,249 entries) |
-| 3. jieba segmentation + word-frequency counting | Identified **16 antecedent variables** |
-| 4. LDA topic modeling | Discovered **10 major topics** (Top 3: AI Social Interaction 16.11%, AI Training & Humans 14.69%, AI Digital Human Applications 12.59%) |
+| 1. Multi-platform collection (Bilibili / Weibo / Zhihu / Xiaohongshu / Douban) | `text-mining-data/*.csv` (94,493 raw comments) |
+| 2. Deduplication + relevance screening | 22,204 valid comments retained (retention rate 77.47%) |
+| 3. jieba segmentation + LDA topic modeling | **10 topics** identified (k = 10, C_v = 0.5478, NPMI = −0.247) |
+| 4. Construct extraction | **11 antecedent constructs** from 3 relevant topics + 3 theory-derived outcome constructs |
 
 ### Stage 2 — Quantitative Modeling
 
 - **Scale Design**: 14 latent constructs × 5 items each, 5-point Likert scale
-- **Sample**: Student pilot + pre-survey + final sample, **n = 797**
-- **Tool**: SmartPLS (PLS-SEM, repeated-indicators approach for second-order reflective constructs)
+- **Focus Groups**: 4 groups, 29 participants, 2×2 stratified design (high/low anxiety × high/low AI experience)
+- **Sample**: Two channels (snowball n = 436 + panel pool n = 284), **n = 720**
+- **Tool**: SmartPLS 3 (PLS-SEM, repeated-indicators approach for second-order reflective constructs)
+- **AAI Operationalization**: Formative construct via PCA single-indicator method (3 PCA scores as formative indicators)
 
 #### Core Constructs
 
 | Category | Construct |
 |---|---|
-| Push | Social Anxiety (SA), Social Burnout (SB) → **Social Pain Drive** |
-| Concern | Privacy Concern (PC), Need for Control (NFC), AI Replacement Threat (ART), Digital Ethics Awareness (DEA) → **Risk & Control Concern** |
-| Enabler | Technology Self-Efficacy (TSE) |
-| Value | AI Human-like Perception (HTP), Digital Self-Concept (DSC) → **Self-Extension Trust** |
-| Mediator | Cognitive Offloading (SCO), Self-Identity Relevance (SIR) |
-| DV | Adoption Intensity → Usage Intention (UI), Delegation Extent (DE), Willingness to Pay (WTP) |
+| Push | Social Anxiety (SA), Social Burden (SB) → **Social Pain Drive (SPD)** |
+| Concern | Privacy Concern (PC), Need for Control (NFC), AI Risk Tolerance (ART), Delegation Ethics Awareness (DEA) → **Risk & Control Concern (RCC)** |
+| Enabler | Tech Self-Efficacy (TSE) |
+| Value | Human Touch Perception (HTP), Digital Self-Extension Credibility (DSC) |
+| Mediator | Perceived Cognitive Benefit (PCB), Social Identity Risk (SIR) |
+| DV (formative) | **Anticipated Adoption Intensity (AAI)** ← Usage Intention (UI), Delegation Extent (DE), Willingness to Pay (WTP) via PCA |
 
-#### Key Path Coefficients (Bootstrap, n = 797)
+#### Key Path Coefficients (Bootstrap 5,000, n = 720)
 
 | Path | β | T | p |
 |---|---:|---:|---:|
-| Self-Extension Trust → Adoption Intensity | **0.429** | 14.80 | <0.001 |
-| Cognitive Offloading → Adoption Intensity | **0.415** | 13.56 | <0.001 |
-| Self-Identity Relevance → Adoption Intensity | **−0.064** | 2.50 | 0.013 |
-| Technology Self-Efficacy → Cognitive Offloading | **0.560** | 16.93 | <0.001 |
-| AI Human-like Perception → Self-Extension Trust | **0.369** | 9.19 | <0.001 |
-| Risk & Control Concern → Self-Identity Relevance | **0.646** | 28.40 | <0.001 |
-| Adoption Intensity → WTP / UI / DE | **0.85–0.87** | >67 | <0.001 |
+| Digital Self-Extension Credibility → AAI | **0.603** | 21.29 | <0.001 |
+| Perceived Cognitive Benefit → AAI | **0.168** | 5.68 | <0.001 |
+| Risk & Control Concern → AAI (direct) | **0.131** | 3.76 | <0.001 |
+| Social Identity Risk → AAI | **−0.099** | 2.71 | 0.007 |
+| Tech Self-Efficacy → DSC | **0.368** | 9.46 | <0.001 |
+| Tech Self-Efficacy → PCB | **0.375** | 10.98 | <0.001 |
+| Human Touch Perception → DSC | **0.361** | 8.96 | <0.001 |
+| Social Pain Drive → PCB | **0.093** | 2.71 | 0.007 |
+| Risk & Control Concern → SIR | **0.653** | 27.11 | <0.001 |
 
 ---
 
 ## Key Findings
 
-### Reliability and Validity (n = 797)
+### Reliability and Validity (n = 720)
 
-- **Cronbach's α**: 0.804–0.938 (all ≥ 0.70)
-- **Composite Reliability (CR)**: 0.865–0.945 (all ≥ 0.70)
-- **AVE**: First-order constructs all ≥ 0.572; second-order / composite constructs 0.46–0.49 (acceptable given high CR)
+- **Cronbach's α**: 0.828–0.944 (all ≥ 0.70)
+- **Composite Reliability (CR)**: 0.881–0.949 (all ≥ 0.70)
+- **AVE**: Most constructs ≥ 0.604; RCC (0.485) and SPD (0.507) slightly below 0.50 due to repeated indicators approach for second-order reflective constructs
 - **HTMT**: All theoretically independent construct pairs < 0.85; threshold exceeded only for structurally expected high correlations between second-order and first-order sub-constructs
-- **VIF**: 1.13–2.78, no multicollinearity issues
+- **VIF**: 1.172–2.834, no multicollinearity issues
+- **CMB**: Harman's single-factor test (26.9% < 50%) and Full Collinearity VIF (all < 3.3) confirm CMB is not a serious threat
 
 ### Explanatory and Predictive Power
 
 | Endogenous Variable | R² | Q² (Blindfolding) |
 |---|---:|---:|
-| Self-Extension Trust | 0.390 | 0.219 |
-| Cognitive Offloading | 0.370 | 0.235 |
-| Self-Identity Relevance | 0.418 | 0.246 |
-| **Adoption Intensity** | **0.547** | 0.266 |
-| Willingness to Pay | 0.730 | 0.503 |
-| Usage Intention | 0.733 | 0.470 |
-| Delegation Extent | 0.757 | 0.491 |
+| Digital Self-Extension Credibility | 0.409 | 0.244 |
+| Perceived Cognitive Benefit | 0.164 | 0.106 |
+| Social Identity Risk | 0.426 | 0.266 |
+| **Anticipated Adoption Intensity** | **0.513** | 0.357 |
 
 ### Main Conclusions
 
-1. **Value + Offloading are the dual engines of adoption**: Self-Extension Trust and Cognitive Offloading account for the majority of variance in Adoption Intensity.
-2. **Concerns are significant but weak in effect**: Self-Identity Relevance has only β = −0.064 on Adoption Intensity; total effects of AI replacement / privacy / control / ethics concerns are all ≤ 0.013 in absolute value.
-3. **Technology Self-Efficacy is the strongest distal antecedent**: Indirect effect through dual mediation paths reaches 0.380.
-4. **Adoption → Intention / Delegation / Payment is highly homogeneous**: β range 0.854–0.870, indicating Adoption Intensity as an integrative intention is robust across scenarios.
-5. **Demographic differences are non-significant**: Age, gender, and education show no significant effects on Adoption Intensity (p > 0.05).
+1. **DSC + PCB are the dual engines of anticipated adoption**: Digital Self-Extension Credibility (β = 0.603) dominates as the strongest proximal driver, followed by Perceived Cognitive Benefit (β = 0.168).
+2. **Risk concerns show a dual effect**: RCC inhibits adoption indirectly through Social Identity Risk (indirect β = −0.065, p = 0.007) but directly facilitates adoption (direct β = 0.131, p < 0.001), with a positive net total effect of 0.066.
+3. **Tech Self-Efficacy is the strongest distal antecedent**: Indirect effect through dual mediation paths (DSC + PCB) reaches 0.285.
+4. **AAI as formative construct**: Usage intention contributes the most (weight = 0.701), followed by WTP (0.249) and delegation extent (0.173), capturing the multi-level nature of AI agent adoption.
+5. **Cross-channel robustness confirmed**: MGA-PLS showed all core structural path differences between snowball and panel channels were non-significant (p > 0.10).
 
 ---
 
@@ -161,12 +154,14 @@ graph TB
 pip install jieba gensim pandas numpy matplotlib scikit-learn
 ```
 
-### Quantitative Modeling (SmartPLS)
+### Quantitative Modeling (SmartPLS 3)
 
-- Load `survey_797.csv` and configure 14 latent variables with structural paths
+- Load `survey_720.csv` and configure 14 latent variables (12 first-order + 2 second-order reflective) with structural paths
+- AAI modeled as formative construct: PCA first principal component scores of UI/DE/WTP as 3 single indicators
 - Inner estimation: path weighting scheme; second-order reflective constructs via repeated-indicators approach
 - Bootstrap: 5,000 resamples with BCa confidence intervals
 - Blindfolding: omission distance d = 7
+- MGA-PLS: multi-group analysis for cross-channel equivalence testing
 
 ---
 
@@ -186,6 +181,7 @@ pip install jieba gensim pandas numpy matplotlib scikit-learn
 
 ## Changelog
 
+- **2026-10-02**: R1 revision: updated to n = 720, renamed constructs per terminology table (SB: Social Burden, ART: AI Risk Tolerance, DEA: Delegation Ethics Awareness, DSC: Digital Self-Extension Credibility, PCB: Perceived Cognitive Benefit, SIR: Social Identity Risk), AAI operationalized as formative via PCA single-indicator method, added MGA-PLS cross-channel validation, paper under revision for *Information Technology & People*
 - **2026-06-07**: Re-initialized repository with `github/` folder as root; removed legacy analysis scripts; added LDA NPMI coherence results
 - **2026-05-15**: Completed PLS-SEM model estimation (n = 797); added path diagrams; updated `.gitignore`
 - **2026-04-21**: Migrated to `social-agent-elys` repository; restructured project layout
@@ -205,4 +201,4 @@ Contributions via Issues or Pull Requests are welcome.
 
 **Maintainer**: AicbLab  
 **Repository**: <https://github.com/AicbLab/social-agent-elys>  
-**Last Updated**: 2026-06-07
+**Last Updated**: 2026-10-02
