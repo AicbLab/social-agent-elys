@@ -1,0 +1,71 @@
+Total rows: 4959 cols: 92 
+Section ' Reliability ': rows =  
+Section ' R2 ': rows =  
+Section ' HTMT ': rows =  
+Section ' f2 Effect Size ': rows =  
+Section ' Model Fit ': rows =  
+Section ' Outer Loadings ': rows = 86 
+  row 85 : NA | NA | NA | NA | NA | NA | NA | NA 
+  row 86 : Outer Loadings | NA | NA | NA | NA | NA | NA | NA 
+  row 87 : NA | NA | NA | NA | NA | NA | NA | NA 
+  row 88 : NA | (控)年龄 | (控)性别 | (控)教育 | AAI[形成型]预期采纳 | ART替代威胁 | DEA数字伦理意识 | DSC[中介]自我延伸可信度 
+  row 89 : ART1_决策威胁 | NA | NA | NA | NA | 0.8029688852966853 | NA | NA 
+Section ' Fornell-Larcker (Criterion) ': rows =  
+Section ' Fornell-Larcker ': rows =  
+Section ' Correlations ': rows =  
+
+--- Partial matches for 'Reliab' ---
+  row 2639 : Construct Reliability and Validity | NA | NA | NA | NA | NA | NA | NA 
+
+--- Partial matches for 'R2' ---
+  row NA : NA | NA | NA | NA | NA | NA | NA | NA 
+
+--- Partial matches for 'HTMT' ---
+  row 2782 : Heterotrait-Monotrait Ratio (HTMT) | NA | NA | NA | NA | NA | NA | NA 
+
+--- Partial matches for 'Fornell' ---
+  row 2664 : Fornell-Larcker Criterion | NA | NA | NA | NA | NA | NA | NA 
+
+--- Partial matches for 'f2' ---
+  row NA : NA | NA | NA | NA | NA | NA | NA | NA 
+
+--- Rows 2600-2610 direct ---
+  row 2600 : Quality Criteria | NA | NA | NA | NA | NA | NA | NA 
+  row 2601 : NA | NA | NA | NA | NA | NA | NA | NA 
+  row 2602 : R Square | NA | NA | NA | NA | NA | NA | NA 
+  row 2603 : NA | NA | NA | NA | NA | NA | NA | NA 
+  row 2604 : NA | R Square | R Square Adjusted | NA | NA | NA | NA | NA 
+  row 2605 : AAI[形成型]预期采纳 | 0.532803185037283 | 0.5271573020770085 | NA | NA | NA | NA | NA 
+  row 2606 : ART替代威胁 | 0.6323924208540684 | 0.6318429326939101 | NA | NA | NA | NA | NA 
+  row 2607 : DEA数字伦理意识 | 0.6922353971296742 | 0.6917753603540833 | NA | NA | NA | NA | NA 
+  row 2608 : DSC[中介]自我延伸可信度 | 0.38440200512410394 | 0.38255889735501447 | NA | NA | NA | NA | NA 
+  row 2609 : NFC控制需求 | 0.7488948834783383 | 0.748519539507454 | NA | NA | NA | NA | NA 
+  row 2610 : PCB[中介]感知认知收益 | 0.10167182472646916 | 0.10032903223727097 | NA | NA | NA | NA | NA 
+
+--- Rows 2635-2660 direct ---
+  row 2635 : SPD[反射型]社交痛苦驱动 | NA | NA | NA | 0.014942484840789536 | NA | NA | NA 
+  row 2636 : TSE技术自我效能感 | NA | NA | NA | NA | NA | NA | 0.15189654291595933 
+  row 2637 : NA | NA | NA | NA | NA | NA | NA | NA 
+  row 2638 : NA | NA | NA | NA | NA | NA | NA | NA 
+  row 2639 : Construct Reliability and Validity | NA | NA | NA | NA | NA | NA | NA 
+  row 2640 : NA | NA | NA | NA | NA | NA | NA | NA 
+  row 2641 : NA | Cronbach's Alpha | rho_A | Composite Reliability | Average Variance Extracted (AVE) | NA | NA | NA 
+  row 2642 : (控)年龄 | NA | 1.0 | NA | NA | NA | NA | NA 
+  row 2643 : (控)性别 | NA | 1.0 | NA | NA | NA | NA | NA 
+  row 2644 : (控)教育 | NA | 1.0 | NA | NA | NA | NA | NA 
+  row 2645 : AAI[形成型]预期采纳 | NA | 1.0 | NA | NA | NA | NA | NA 
+  row 2646 : ART替代威胁 | 0.8645318861162274 | 0.8675409241312286 | 0.902222279244511 | 0.6487689102398162 | NA | NA | NA 
+  row 2647 : DEA数字伦理意识 | 0.8572678711700696 | 0.8608941069681032 | 0.8974975338306858 | 0.6369272880040434 | NA | NA | NA 
+  row 2648 : DSC[中介]自我延伸可信度 | 0.8659963058780938 | 0.869465758335044 | 0.9033301335916866 | 0.6518631466424508 | NA | NA | NA 
+  row 2649 : HTP人情味感知 | 0.8794817522231555 | 0.8829386630938055 | 0.9120138816886897 | 0.6746973549111278 | NA | NA | NA 
+  row 2650 : NFC控制需求 | 0.8833616048049354 | 0.8836752720812882 | 0.9147636076074633 | 0.6823297266997432 | NA | NA | NA 
+  row 2651 : PCB[中介]感知认知收益 | 0.9245473768568963 | 0.9275739044453192 | 0.9429989042102531 | 0.7679242591759988 | NA | NA | NA 
+  row 2652 : PC隐私顾虑 | 0.8977531193069161 | 0.8998493313358912 | 0.9244439479139545 | 0.7100506957840949 | NA | NA | NA 
+  row 2653 : RCC[反射]风险控制顾虑 | 0.9386994070959666 | 0.9400084547615523 | 0.9451641898356761 | 0.4641484890529199 | NA | NA | NA 
+  row 2654 : SA社交焦虑 | 0.8892615338938061 | 0.8896655132468415 | 0.9186147341660686 | 0.6930255546932504 | NA | NA | NA 
+  row 2655 : SB社交倦怠 | 0.8570614916620864 | 0.860012282611665 | 0.8974002130367571 | 0.6365029027495014 | NA | NA | NA 
+  row 2656 : SIR[中介]社会身份风险 | 0.8486938307710742 | 0.860897269239404 | 0.891991877027077 | 0.6239287009003532 | NA | NA | NA 
+  row 2657 : SPD[反射型]社交痛苦驱动 | 0.8885893342667265 | 0.8904891917296321 | 0.9090838444353793 | 0.5008951343838566 | NA | NA | NA 
+  row 2658 : TSE技术自我效能感 | 0.8692003588519922 | 0.8715816610205542 | 0.9053256357318963 | 0.6568686239957124 | NA | NA | NA 
+  row 2659 : NA | NA | NA | NA | NA | NA | NA | NA 
+  row 2660 : NA | NA | NA | NA | NA | NA | NA | NA 
